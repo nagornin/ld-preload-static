@@ -1,0 +1,17 @@
+[package]
+name = "detour"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ld-preload-static = { path = ".." }
+libc = { version = "0.2", default-features = false }
+
+[profile.release]
+panic = "abort"
+
+[profile.dev]
+panic = "abort"
+
+[lib]
+crate-type = ["cdylib"]

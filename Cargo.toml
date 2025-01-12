@@ -1,0 +1,20 @@
+[package]
+name = "ld-preload-static"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libc = { version = "0.2", default-features = false }
+syscalls = { version = "0.6", default-features = false }
+elf = { version = "0.7", default-features = false }
+cfg-if = "1"
+libc-print = { version = "0.1", optional = true }
+spin = "0.9"
+
+[dev-dependencies]
+libc = { version = "0.2", default-features = false }
+
+[features]
+debug = ["libc-print"]
