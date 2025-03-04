@@ -1,7 +1,8 @@
 use cfg_if::cfg_if;
 use core::ptr;
 use libc::{
-    MAP_ANONYMOUS, MAP_FAILED, MAP_PRIVATE, O_RDONLY, PROT_READ, PROT_WRITE,
+    MAP_ANONYMOUS, MAP_FAILED, MAP_PRIVATE, MREMAP_MAYMOVE, O_RDONLY,
+    PROT_READ, PROT_WRITE,
 };
 use syscalls::{raw_syscall, Sysno};
 
@@ -101,7 +102,7 @@ pub unsafe fn realloc(
     len: &mut usize,
     new_len: usize,
 ) -> bool {
-    let new_ptr = mremap(*ptr, *len, new_len, 0);
+    let new_ptr = mremap(*ptr, *len, new_len, MREMAP_MAYMOVE);
 
     if new_ptr == MAP_FAILED.cast() {
         return false;
